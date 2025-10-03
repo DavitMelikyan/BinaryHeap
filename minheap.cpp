@@ -36,12 +36,9 @@ public:
     }
     
     void push(T value) {
-        if (m_size == m_capacity) {
-            m_capacity *= 2;
-            minheap.resize(m_capacity);
-        }
         minheap.push_back(value);
         m_size++;
+        size_t i = m_size - 1;
         while (i != 0 && minheap[(i - 1) / 2] > minheap[i]) {
             std::swap(minheap[i], minheap[(i - 1) / 2]);
             i = (i - 1) / 2;
@@ -50,14 +47,24 @@ public:
 
     void pop() {
         if (m_size <= 0) return; 
-        if (m_size == 1) {
-            --m_size;
-            minheap.pop_back();
-            return;
-        }
         std::swap(minheap[0], minheap[m_size - 1]);
         minheap.pop_back();
         --m_size;
         heapify(0);  
     }
 };
+
+int main() {
+    std::vector<int> vec = {3, 10, 5, 6, 2, 9};
+    MinHeap<int> h(vec.size());
+    h.buildHeap(vec);
+
+    std::cout << "Top after buildHeap: " << h.top() << std::endl; 
+    h.push(15);
+    h.push(7);
+    std::cout << "Top after pushes: " << h.top() << std::endl;
+    h.pop();
+    std::cout << "Top after one pop: " << h.top() << std::endl;
+    h.pop();
+    std::cout << "Top after second pop: " << h.top() << std::endl;
+}
