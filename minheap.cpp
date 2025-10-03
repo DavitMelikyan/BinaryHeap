@@ -40,9 +40,8 @@ public:
             m_capacity *= 2;
             minheap.resize(m_capacity);
         }
+        minheap.push_back(value);
         m_size++;
-        int i = m_size - 1;
-        minheap[i] = value;
         while (i != 0 && minheap[(i - 1) / 2] > minheap[i]) {
             std::swap(minheap[i], minheap[(i - 1) / 2]);
             i = (i - 1) / 2;

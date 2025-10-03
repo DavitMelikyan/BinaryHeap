@@ -40,9 +40,8 @@ public:
             m_capacity *= 2;
             maxheap.resize(m_capacity);
         }
+        maxheap.push_back(value);
         m_size++;
-        int i = m_size - 1;
-        maxheap[i] = value;
         while (i != 0 && maxheap[(i - 1) / 2] < maxheap[i]) {
             std::swap(maxheap[i], maxheap[(i - 1) / 2]);
             i = (i - 1) / 2;
